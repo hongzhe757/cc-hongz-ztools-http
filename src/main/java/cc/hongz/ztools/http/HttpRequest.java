@@ -292,8 +292,8 @@ public class HttpRequest extends HttpBase<HttpRequest> {
      * @return this
      * @since 4.1.8
      */
-    public HttpRequest setUrl(final String url) {
-        return setUrl(UrlBuilder.ofHttp(url, this.charset));
+    public HttpRequest setUrl(final String newUrl) {
+        return setUrl(UrlBuilder.ofHttp(newUrl, this.charset));
     }
 
     /**
@@ -321,8 +321,8 @@ public class HttpRequest extends HttpBase<HttpRequest> {
      * @return this
      * @since 4.1.9
      */
-    public HttpRequest setUrlHandler(final URLStreamHandler urlHandler) {
-        this.urlHandler = urlHandler;
+    public HttpRequest setUrlHandler(final URLStreamHandler newUrlHandler) {
+        this.urlHandler = newUrlHandler;
         return this;
     }
 
@@ -344,7 +344,7 @@ public class HttpRequest extends HttpBase<HttpRequest> {
      * @see #method(Method)
      * @since 4.1.8
      */
-    public HttpRequest setMethod(final Method method) {
+    public HttpRequest setMethod(final Method newMethod) {
         return method(method);
     }
 
@@ -378,8 +378,8 @@ public class HttpRequest extends HttpBase<HttpRequest> {
      * @param method HTTP方法
      * @return HttpRequest
      */
-    public HttpRequest method(final Method method) {
-        this.method = method;
+    public HttpRequest method(final Method newMethod) {
+        this.method = newMethod;
         return this;
     }
 
@@ -476,8 +476,8 @@ public class HttpRequest extends HttpBase<HttpRequest> {
      * @return this
      * @since 3.0.7
      */
-    public HttpRequest cookie(final String cookie) {
-        this.cookie = cookie;
+    public HttpRequest cookie(final String newCookie) {
+        this.cookie = newCookie;
         return this;
     }
 
@@ -799,8 +799,8 @@ public class HttpRequest extends HttpBase<HttpRequest> {
      * @param config 配置
      * @return this
      */
-    public HttpRequest setConfig(final HttpConfig config) {
-        this.config = config;
+    public HttpRequest setConfig(final HttpConfig newConfig) {
+        this.config = newConfig;
         return this;
     }
 
@@ -987,8 +987,8 @@ public class HttpRequest extends HttpBase<HttpRequest> {
      * @return this
      * @since 4.5.0
      */
-    public HttpRequest setRest(final boolean isRest) {
-        this.isRest = isRest;
+    public HttpRequest setRest(final boolean newIsRest) {
+        this.isRest = newIsRest;
         return this;
     }
 

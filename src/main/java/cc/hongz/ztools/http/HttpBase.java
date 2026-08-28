@@ -174,12 +174,12 @@ public abstract class HttpBase<T> {
      * @return this
      * @since 4.6.3
      */
-    public T headerMap(final Map<String, String> headers, final boolean isOverride) {
-        if (MapUtil.isEmpty(headers)) {
+    public T headerMap(final Map<String, String> newHeaders, final boolean isOverride) {
+        if (MapUtil.isEmpty(newHeaders)) {
             return (T) this;
         }
 
-        for (Entry<String, String> entry : headers.entrySet()) {
+        for (Entry<String, String> entry : newHeaders.entrySet()) {
             this.header(entry.getKey(), StrUtil.nullToEmpty(entry.getValue()), isOverride);
         }
         return (T) this;
@@ -192,8 +192,8 @@ public abstract class HttpBase<T> {
      * @param headers 请求头
      * @return this
      */
-    public T header(final Map<String, List<String>> headers) {
-        return header(headers, false);
+    public T header(final Map<String, List<String>> newHeaders) {
+        return header(newHeaders, false);
     }
 
     /**
@@ -204,13 +204,13 @@ public abstract class HttpBase<T> {
      * @return this
      * @since 4.0.8
      */
-    public T header(final Map<String, List<String>> headers, final boolean isOverride) {
-        if (MapUtil.isEmpty(headers)) {
+    public T header(final Map<String, List<String>> newHeaders, final boolean isOverride) {
+        if (MapUtil.isEmpty(newHeaders)) {
             return (T) this;
         }
 
         String name;
-        for (Entry<String, List<String>> entry : headers.entrySet()) {
+        for (Entry<String, List<String>> entry : newHeaders.entrySet()) {
             name = entry.getKey();
             for (String value : entry.getValue()) {
                 this.header(name, StrUtil.nullToEmpty(value), isOverride);
@@ -227,12 +227,12 @@ public abstract class HttpBase<T> {
      * @return this
      * @since 4.0.3
      */
-    public T addHeaders(final Map<String, String> headers) {
-        if (MapUtil.isEmpty(headers)) {
+    public T addHeaders(final Map<String, String> newHeaders) {
+        if (MapUtil.isEmpty(newHeaders)) {
             return (T) this;
         }
 
-        for (Entry<String, String> entry : headers.entrySet()) {
+        for (Entry<String, String> entry : newHeaders.entrySet()) {
             this.header(entry.getKey(), StrUtil.nullToEmpty(entry.getValue()), false);
         }
         return (T) this;
@@ -319,8 +319,8 @@ public abstract class HttpBase<T> {
      * @param httpVersion Http版本，{@link HttpBase#HTTP_1_0}，{@link HttpBase#HTTP_1_1}
      * @return this
      */
-    public T httpVersion(final String httpVersion) {
-        this.httpVersion = httpVersion;
+    public T httpVersion(final String newHttpVersion) {
+        this.httpVersion = newHttpVersion;
         return (T) this;
     }
 
@@ -349,9 +349,9 @@ public abstract class HttpBase<T> {
      * @return T 自己
      * @see CharsetUtil
      */
-    public T charset(final String charset) {
-        if (StrUtil.isNotBlank(charset)) {
-            charset(Charset.forName(charset));
+    public T charset(final String newCharset) {
+        if (StrUtil.isNotBlank(newCharset)) {
+            charset(Charset.forName(newCharset));
         }
         return (T) this;
     }
@@ -363,9 +363,9 @@ public abstract class HttpBase<T> {
      * @return T 自己
      * @see CharsetUtil
      */
-    public T charset(final Charset charset) {
-        if (null != charset) {
-            this.charset = charset;
+    public T charset(final Charset newCharset) {
+        if (null != newCharset) {
+            this.charset = newCharset;
         }
         return (T) this;
     }

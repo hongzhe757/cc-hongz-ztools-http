@@ -660,7 +660,7 @@ public class HttpResponse extends HttpBase<HttpResponse> implements Closeable {
      * @param in 输入流
      * @throws IORuntimeException IO异常
      */
-    private void readBody(final InputStream in) throws IORuntimeException {
+    private void readBody(final InputStream newIn) throws IORuntimeException {
         if (ignoreBody) {
             return;
         }

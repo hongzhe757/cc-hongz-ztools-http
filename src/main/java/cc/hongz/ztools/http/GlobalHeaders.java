@@ -172,7 +172,7 @@ public enum GlobalHeaders {
      * @param headers 请求头
      * @return this
      */
-    public GlobalHeaders header(final Map<String, List<String>> headers) {
+    public GlobalHeaders header(final Map<String, List<String>> newHeaders) {
         if (MapUtil.isEmpty(headers)) {
             return this;
         }

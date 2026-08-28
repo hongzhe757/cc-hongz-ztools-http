@@ -221,8 +221,8 @@ public class HttpServerResponse extends HttpServerBase {
      * @param charset 编码
      * @return this
      */
-    public HttpServerResponse setCharset(final Charset charset) {
-        this.charset = charset;
+    public HttpServerResponse setCharset(final Charset newCharset) {
+        this.charset = newCharset;
         return this;
     }
 

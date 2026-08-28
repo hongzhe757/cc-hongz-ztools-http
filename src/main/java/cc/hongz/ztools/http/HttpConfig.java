@@ -166,7 +166,7 @@ public class HttpConfig {
      * @param maxRedirectCount 最大重定向次数
      * @return this
      */
-    public HttpConfig setMaxRedirectCount(final int maxRedirectCount) {
+    public HttpConfig setMaxRedirectCount(final int newMaxRedirectCount) {
         this.maxRedirectCount = Math.max(maxRedirectCount, 0);
         return this;
     }
@@ -178,9 +178,9 @@ public class HttpConfig {
      * @param hostnameVerifier HostnameVerifier
      * @return this
      */
-    public HttpConfig setHostnameVerifier(final HostnameVerifier hostnameVerifier) {
+    public HttpConfig setHostnameVerifier(final HostnameVerifier newHostnameVerifier) {
         // 验证域
-        this.hostnameVerifier = hostnameVerifier;
+        this.hostnameVerifier = newHostnameVerifier;
         return this;
     }
 
@@ -203,8 +203,8 @@ public class HttpConfig {
      * @param proxy 代理 {@link Proxy}
      * @return this
      */
-    public HttpConfig setProxy(final Proxy proxy) {
-        this.proxy = proxy;
+    public HttpConfig setProxy(final Proxy newProxy) {
+        this.proxy = newProxy;
         return this;
     }
 
@@ -216,8 +216,8 @@ public class HttpConfig {
      * @param ssf SSLScketFactory
      * @return this
      */
-    public HttpConfig setSSLSocketFactory(final SSLSocketFactory ssf) {
-        this.ssf = ssf;
+    public HttpConfig setSSLSocketFactory(final SSLSocketFactory newSsf) {
+        this.ssf = newSsf;
         return this;
     }
 
@@ -250,8 +250,8 @@ public class HttpConfig {
      * @param blockSize 块大小（bytes数），0或小于0表示不设置Chuncked模式
      * @return this
      */
-    public HttpConfig setBlockSize(final int blockSize) {
-        this.blockSize = blockSize;
+    public HttpConfig setBlockSize(final int newBlockSize) {
+        this.blockSize = newBlockSize;
         return this;
     }
 
@@ -264,8 +264,8 @@ public class HttpConfig {
      * @return this
      * @since 5.7.20
      */
-    public HttpConfig setIgnoreEOFError(final boolean ignoreEOFError) {
-        this.ignoreEOFError = ignoreEOFError;
+    public HttpConfig setIgnoreEOFError(final boolean newIgnoreEOFError) {
+        this.ignoreEOFError = newIgnoreEOFError;
         return this;
     }
 
@@ -277,8 +277,8 @@ public class HttpConfig {
      * @param decodeUrl 是否忽略解码URL
      * @return this
      */
-    public HttpConfig setDecodeUrl(final boolean decodeUrl) {
-        this.decodeUrl = decodeUrl;
+    public HttpConfig setDecodeUrl(final boolean newDecodeUrl) {
+        this.decodeUrl = newDecodeUrl;
         return this;
     }
 
@@ -310,8 +310,8 @@ public class HttpConfig {
      * @param interceptorOnRedirect 重定向时是否使用拦截器
      * @return this
      */
-    public HttpConfig setInterceptorOnRedirect(final boolean interceptorOnRedirect) {
-        this.interceptorOnRedirect = interceptorOnRedirect;
+    public HttpConfig setInterceptorOnRedirect(final boolean newInterceptorOnRedirect) {
+        this.interceptorOnRedirect = newInterceptorOnRedirect;
         return this;
     }
 
@@ -322,8 +322,8 @@ public class HttpConfig {
      * @return this
      * @since 5.8.15
      */
-    public HttpConfig setFollowRedirectsCookie(final boolean followRedirectsCookie) {
-        this.followRedirectsCookie = followRedirectsCookie;
+    public HttpConfig setFollowRedirectsCookie(final boolean newFollowRedirectsCookie) {
+        this.followRedirectsCookie = newFollowRedirectsCookie;
         return this;
     }
 
@@ -334,8 +334,8 @@ public class HttpConfig {
      * @return this
      * @since 5.8.33
      */
-    public HttpConfig setUseDefaultContentTypeIfNull(final boolean useDefaultContentTypeIfNull) {
-        this.useDefaultContentTypeIfNull = useDefaultContentTypeIfNull;
+    public HttpConfig setUseDefaultContentTypeIfNull(final boolean newUseDefaultContentTypeIfNull) {
+        this.useDefaultContentTypeIfNull = newUseDefaultContentTypeIfNull;
         return this;
     }
 
@@ -345,8 +345,8 @@ public class HttpConfig {
      * @return this
      * @since 5.8.39
      */
-    public HttpConfig setIgnoreContentLength(final boolean ignoreContentLength) {
-        this.ignoreContentLength = ignoreContentLength;
+    public HttpConfig setIgnoreContentLength(final boolean newIgnoreContentLength) {
+        this.ignoreContentLength = newIgnoreContentLength;
         return this;
     }
 }

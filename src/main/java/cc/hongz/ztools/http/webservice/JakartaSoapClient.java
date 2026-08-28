@@ -172,7 +172,7 @@ public class JakartaSoapClient extends HttpBase<JakartaSoapClient> {
      * @param protocol 协议版本枚举，见{@link SoapProtocol}
      * @return this
      */
-    public JakartaSoapClient init(final SoapProtocol protocol) {
+    public JakartaSoapClient init(final SoapProtocol newProtocol) {
         // 创建消息工厂
         try {
             this.factory = MessageFactory.newInstance(protocol.getValue());
@@ -235,8 +235,8 @@ public class JakartaSoapClient extends HttpBase<JakartaSoapClient> {
      * @param url Webservice请求地址
      * @return this
      */
-    public JakartaSoapClient setUrl(final String url) {
-        this.url = url;
+    public JakartaSoapClient setUrl(final String newUrl) {
+        this.url = newUrl;
         return this;
     }
 
@@ -368,7 +368,7 @@ public class JakartaSoapClient extends HttpBase<JakartaSoapClient> {
      * @param namespaceURI 命名空间URI
      * @return this
      */
-    public JakartaSoapClient setMethod(final String methodName, final String namespaceURI) {
+    public JakartaSoapClient setMethod(final String methodName, final String newNamespaceURI) {
         final List<String> methodNameList = StrUtil.split(methodName, ':');
         final QName qName;
         if (2 == methodNameList.size()) {
