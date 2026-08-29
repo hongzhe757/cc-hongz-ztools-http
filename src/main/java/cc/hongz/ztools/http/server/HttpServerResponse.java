@@ -256,8 +256,8 @@ public class HttpServerResponse extends HttpServerBase {
      * @return 响应数据流
      */
     public PrintWriter getWriter() {
-        final Charset charset = ObjectUtil.defaultIfNull(this.charset, DEFAULT_CHARSET);
-        return new PrintWriter(new OutputStreamWriter(getOut(), charset));
+        final Charset resolvedCharset = ObjectUtil.defaultIfNull(this.charset, DEFAULT_CHARSET);
+        return new PrintWriter(new OutputStreamWriter(getOut(), resolvedCharset));
     }
 
     /**
@@ -279,8 +279,8 @@ public class HttpServerResponse extends HttpServerBase {
      * @return this
      */
     public HttpServerResponse write(final String data) {
-        final Charset charset = ObjectUtil.defaultIfNull(this.charset, DEFAULT_CHARSET);
-        return write(StrUtil.bytes(data, charset));
+        final Charset resolvedCharset = ObjectUtil.defaultIfNull(this.charset, DEFAULT_CHARSET);
+        return write(StrUtil.bytes(data, resolvedCharset));
     }
 
     /**
@@ -393,7 +393,8 @@ public class HttpServerResponse extends HttpServerBase {
         if (StrUtil.isBlank(resolvedFileName)) {
             resolvedFileName = file.getName();
         }
-        final String contentType = ObjectUtil.defaultIfNull(HttpUtil.getMimeType(resolvedFileName), "application/octet-stream");
+        final String contentType = ObjectUtil.defaultIfNull(
+                HttpUtil.getMimeType(resolvedFileName), "application/octet-stream");
         BufferedInputStream in = null;
         try {
             in = FileUtil.getInputStream(file);
@@ -426,12 +427,14 @@ public class HttpServerResponse extends HttpServerBase {
      * @return this
      * @since 5.2.7
      */
-    public HttpServerResponse write(final InputStream in, final int length, final String contentType, final String fileName) {
-        final Charset charset = ObjectUtil.defaultIfNull(this.charset, DEFAULT_CHARSET);
+    public HttpServerResponse write(final InputStream in, final int length, final String contentType,
+            final String fileName) {
+        final Charset resolvedCharset = ObjectUtil.defaultIfNull(this.charset, DEFAULT_CHARSET);
 
         if (false == contentType.startsWith("text/")) {
             // 非文本类型数据直接走下载
-            setHeader(Header.CONTENT_DISPOSITION, StrUtil.format("attachment;filename={}", URLUtil.encode(fileName, charset)));
+            setHeader(Header.CONTENT_DISPOSITION,
+                    StrUtil.format("attachment;filename={}", URLUtil.encode(fileName, resolvedCharset)));
         }
         return write(in, length, contentType);
     }

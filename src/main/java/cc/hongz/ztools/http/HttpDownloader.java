@@ -25,7 +25,8 @@ public class HttpDownloader {
      * @param streamPress   进度条 {@link StreamProgress}
      * @return 文本
      */
-    public static String downloadString(final String url, final Charset customCharset, final StreamProgress streamPress) {
+    public static String downloadString(final String url, final Charset customCharset,
+            final StreamProgress streamPress) {
         final FastByteArrayOutputStream out = new FastByteArrayOutputStream();
         download(url, out, true, streamPress);
         return null == customCharset ? out.toString() : out.toString(customCharset);
@@ -62,7 +63,8 @@ public class HttpDownloader {
      * @param streamProgress  进度条
      * @return 文件大小
      */
-    public static long downloadFile(final String url, final File targetFileOrDir, final int timeout, final StreamProgress streamProgress) {
+    public static long downloadFile(final String url, final File targetFileOrDir, final int timeout,
+            final StreamProgress streamProgress) {
         Assert.notNull(targetFileOrDir, "[targetFileOrDir] is null !");
 
         return requestDownload(url, timeout).writeBody(targetFileOrDir, streamProgress);
@@ -81,7 +83,8 @@ public class HttpDownloader {
      * @return 下载大小
      * @since 5.7.12
      */
-    public static long downloadFile(final String url, final File targetFileOrDir, final String tempFileSuffix, final int timeout, final StreamProgress streamProgress) {
+    public static long downloadFile(final String url, final File targetFileOrDir, final String tempFileSuffix,
+            final int timeout, final StreamProgress streamProgress) {
         Assert.notNull(targetFileOrDir, "[targetFileOrDir] is null !");
 
         return requestDownload(url, timeout).writeBody(targetFileOrDir, tempFileSuffix, streamProgress);
@@ -96,7 +99,8 @@ public class HttpDownloader {
      * @param streamProgress  进度条
      * @return 文件
      */
-    public static File downloadForFile(final String url, final File targetFileOrDir, final int timeout, final StreamProgress streamProgress) {
+    public static File downloadForFile(final String url, final File targetFileOrDir, final int timeout,
+            final StreamProgress streamProgress) {
         Assert.notNull(targetFileOrDir, "[targetFileOrDir] is null !");
 
         // writeBody后会自动关闭网络流
@@ -112,7 +116,8 @@ public class HttpDownloader {
      * @param streamProgress 进度条
      * @return 文件大小
      */
-    public static long download(final String url, final OutputStream out, final boolean isCloseOut, final StreamProgress streamProgress) {
+    public static long download(final String url, final OutputStream out, final boolean isCloseOut,
+            final StreamProgress streamProgress) {
         Assert.notNull(out, "[out] is null !");
 
         // writeBody后会自动关闭网络流

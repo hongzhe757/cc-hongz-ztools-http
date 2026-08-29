@@ -14,6 +14,7 @@ package cc.hongz.ztools.http.server.filter;
 
 import cc.hongz.ztools.core.exceptions.ExceptionUtil;
 import cc.hongz.ztools.core.util.StrUtil;
+import cc.hongz.ztools.http.HttpStatus;
 import cc.hongz.ztools.http.server.HttpServerRequest;
 import cc.hongz.ztools.http.server.HttpServerResponse;
 
@@ -24,14 +25,17 @@ import cc.hongz.ztools.http.server.HttpServerResponse;
  */
 public class DefaultExceptionFilter extends ExceptionFilter {
 
-    private static final String TEMPLATE_ERROR = "<!DOCTYPE html><html><head><title>Hutool - Error report</title><style>h1,h3 {color:white; background-color: gray;}</style></head><body><h1>HTTP Status {} - {}</h1><hr size=\"1\" noshade=\"noshade\" /><p>{}</p><hr size=\"1\" noshade=\"noshade\" /><h3>Hutool</h3></body></html>";
+    private static final String TEMPLATE_ERROR = "<!DOCTYPE html><html><head><title>Hutool - Error report</title>"
+            + "<style>h1,h3 {color:white; background-color: gray;}</style></head><body>"
+            + "<h1>HTTP Status {} - {}</h1><hr size=\"1\" noshade=\"noshade\" /><p>{}</p>"
+            + "<hr size=\"1\" noshade=\"noshade\" /><h3>Hutool</h3></body></html>";
 
     @Override
     public void afterException(final HttpServerRequest req, final HttpServerResponse res, final Throwable e) {
         String content = ExceptionUtil.stacktraceToString(e);
         content = content.replace("\n", "<br/>\n");
-        content = StrUtil.format(TEMPLATE_ERROR, 500, req.getURI(), content);
+        content = StrUtil.format(TEMPLATE_ERROR, HttpStatus.HTTP_INTERNAL_ERROR, req.getURI(), content);
 
-        res.sendError(500, content);
+        res.sendError(HttpStatus.HTTP_INTERNAL_ERROR, content);
     }
 }

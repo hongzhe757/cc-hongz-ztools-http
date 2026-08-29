@@ -85,8 +85,10 @@ public class Platform extends UserAgentInfo {
      */
     public static final List<Platform> platforms;
 
+    private static final int PLATFORM_COUNT = 13;
+
     static {
-        platforms = new ArrayList<>(13);
+        platforms = new ArrayList<>(PLATFORM_COUNT);
         platforms.addAll(mobilePlatforms);
         platforms.addAll(desktopPlatforms);
     }

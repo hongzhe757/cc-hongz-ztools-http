@@ -389,7 +389,8 @@ public class HttpServerRequest extends HttpServerBase {
      * @return IP地址
      */
     public String getClientIP(final String... otherHeaderNames) {
-        String[] headers = {"X-Forwarded-For", "X-Real-IP", "Proxy-Client-IP", "WL-Proxy-Client-IP", "HTTP_CLIENT_IP", "HTTP_X_FORWARDED_FOR"};
+        String[] headers = {"X-Forwarded-For", "X-Real-IP", "Proxy-Client-IP", "WL-Proxy-Client-IP",
+            "HTTP_CLIENT_IP", "HTTP_X_FORWARDED_FOR"};
         if (ArrayUtil.isNotEmpty(otherHeaderNames)) {
             headers = ArrayUtil.addAll(otherHeaderNames, headers);
         }

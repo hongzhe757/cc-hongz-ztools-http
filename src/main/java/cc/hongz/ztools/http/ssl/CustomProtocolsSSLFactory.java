@@ -49,7 +49,8 @@ public class CustomProtocolsSSLFactory extends SSLSocketFactory {
     }
 
     @Override
-    public SSLSocket createSocket(final Socket s, final String host, final int port, final boolean autoClose) throws IOException {
+    public SSLSocket createSocket(final Socket s, final String host, final int port, final boolean autoClose)
+            throws IOException {
         final SSLSocket socket = (SSLSocket) base.createSocket(s, host, port, autoClose);
         resetProtocols(socket);
         return socket;
@@ -63,7 +64,8 @@ public class CustomProtocolsSSLFactory extends SSLSocketFactory {
     }
 
     @Override
-    public Socket createSocket(final String host, final int port, final InetAddress localHost, final int localPort) throws IOException {
+    public Socket createSocket(final String host, final int port, final InetAddress localHost, final int localPort)
+            throws IOException {
         final SSLSocket socket = (SSLSocket) base.createSocket(host, port, localHost, localPort);
         resetProtocols(socket);
         return socket;
@@ -77,7 +79,8 @@ public class CustomProtocolsSSLFactory extends SSLSocketFactory {
     }
 
     @Override
-    public Socket createSocket(final InetAddress address, final int port, final InetAddress localAddress, final int localPort) throws IOException {
+    public Socket createSocket(final InetAddress address, final int port, final InetAddress localAddress,
+            final int localPort) throws IOException {
         final SSLSocket socket = (SSLSocket) base.createSocket(address, port, localAddress, localPort);
         resetProtocols(socket);
         return socket;

@@ -239,7 +239,8 @@ public class HttpConnection {
      * @return this
      * @since 5.8.37
      */
-    public HttpConnection header(final Map<String, List<String>> headerMap, final boolean isOverride, final boolean isHeaderAggregated) {
+    public HttpConnection header(final Map<String, List<String>> headerMap, final boolean isOverride,
+            final boolean isHeaderAggregated) {
         if (!isHeaderAggregated) {
             return header(headerMap, isOverride);
         }
@@ -295,17 +296,19 @@ public class HttpConnection {
      * @return this
      * @throws HttpException KeyManagementException和NoSuchAlgorithmException异常包装
      */
-    public HttpConnection setHttpsInfo(final HostnameVerifier hostnameVerifier, final SSLSocketFactory ssf) throws HttpException {
-        final HttpURLConnection conn = this.conn;
+    public HttpConnection setHttpsInfo(final HostnameVerifier hostnameVerifier, final SSLSocketFactory ssf)
+            throws HttpException {
+        final HttpURLConnection connection = this.conn;
 
-        if (conn instanceof HttpsURLConnection) {
+        if (connection instanceof HttpsURLConnection) {
             // Https请求
-            final HttpsURLConnection httpsConn = (HttpsURLConnection) conn;
+            final HttpsURLConnection httpsConn = (HttpsURLConnection) connection;
             // 验证域
             httpsConn.setHostnameVerifier(ObjectUtil.defaultIfNull(hostnameVerifier,
                 // CVE-2022-22885 https://github.com/chinabugotech/hutool/issues/2042
                 // 增加全局变量可选是否不验证host
-                HttpGlobalConfig.isTrustAnyHost() ? DefaultSSLInfo.TRUST_ANY_HOSTNAME_VERIFIER : HttpsURLConnection.getDefaultHostnameVerifier()));
+                HttpGlobalConfig.isTrustAnyHost() ? DefaultSSLInfo.TRUST_ANY_HOSTNAME_VERIFIER
+                        : HttpsURLConnection.getDefaultHostnameVerifier()));
             httpsConn.setSSLSocketFactory(ObjectUtil.defaultIfNull(ssf, DefaultSSLInfo.DEFAULT_SSF));
         }
 
@@ -578,13 +581,14 @@ public class HttpConnection {
      * @return {@link HttpURLConnection}，https返回{@link HttpsURLConnection}
      */
     private HttpURLConnection openHttp() throws IOException {
-        final URLConnection conn = openConnection();
-        if (false == conn instanceof HttpURLConnection) {
+        final URLConnection connection = openConnection();
+        if (false == connection instanceof HttpURLConnection) {
             // 防止其它协议造成的转换异常
-            throw new HttpException("'{}' of URL [{}] is not a http connection, make sure URL is format for http.", conn.getClass().getName(), this.url);
+            throw new HttpException("'{}' of URL [{}] is not a http connection, make sure URL is format for http.",
+                connection.getClass().getName(), this.url);
         }
 
-        return (HttpURLConnection) conn;
+        return (HttpURLConnection) connection;
     }
 
     /**

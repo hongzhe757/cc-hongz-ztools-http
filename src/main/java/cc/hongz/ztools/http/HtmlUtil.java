@@ -17,22 +17,34 @@ import cc.hongz.ztools.core.util.StrUtil;
 @SuppressWarnings("checkstyle:HideUtilityClassConstructor")
 public class HtmlUtil {
 
+    /** 不断开空格. */
     public static final String NBSP = StrUtil.HTML_NBSP;
+    /** &amp; 符号. */
     public static final String AMP = StrUtil.HTML_AMP;
+    /** 双引号. */
     public static final String QUOTE = StrUtil.HTML_QUOTE;
+    /** 单引号. */
     public static final String APOS = StrUtil.HTML_APOS;
+    /** 小于号. */
     public static final String LT = StrUtil.HTML_LT;
+    /** 大于号. */
     public static final String GT = StrUtil.HTML_GT;
 
+    /** HTML 标记匹配正则. */
     public static final String RE_HTML_MARK = "(<[^<]*?>)|(<[\\s]*?/[^<]*?>)|(<[^<]*?/[\\s]*?>)";
+    /** 空 HTML 标记匹配正则. */
     public static final String RE_HTML_EMPTY_MARK = "<(\\w+)([^>]*)>\\s*</\\1>";
+    /** script 标签匹配正则. */
     public static final String RE_SCRIPT = "<[\\s]*?script[^>]*?>.*?<[\\s]*?\\/[\\s]*?script[\\s]*?>";
 
-    private static final char[][] TEXT = new char[256][];
+    /** ASCII 字符数量（0-255）. */
+    private static final int ASCII_CHAR_COUNT = 256;
+
+    private static final char[][] TEXT = new char[ASCII_CHAR_COUNT][];
 
     static {
         // ascii码值最大的是【0x7f=127】，扩展ascii码值最大的是【0xFF=255】，因为ASCII码使用指定的7位或8位二进制数组合来表示128或256种可能的字符，标准ASCII码也叫基础ASCII码。
-        for (int i = 0; i < 256; i++) {
+        for (int i = 0; i < ASCII_CHAR_COUNT; i++) {
             TEXT[i] = new char[] { (char) i };
         }
 
@@ -42,7 +54,7 @@ public class HtmlUtil {
         TEXT['&'] = AMP.toCharArray(); // &符
         TEXT['<'] = LT.toCharArray(); // 小于号
         TEXT['>'] = GT.toCharArray(); // 大于号
-        TEXT[' '] = NBSP.toCharArray(); // 不断开空格（non-breaking space，缩写nbsp。ASCII值是32：是用键盘输入的空格；ASCII值是160：不间断空格，即 &nbsp，所产生的空格，作用是在页面换行时不被打断）
+        TEXT[' '] = NBSP.toCharArray(); // 不断开空格（non-breaking space，缩写nbsp）
     }
 
     /**
@@ -218,7 +230,7 @@ public class HtmlUtil {
         char c;
         for (int i = 0; i < len; i++) {
             c = text.charAt(i);
-            if (c < 256) {
+            if (c < ASCII_CHAR_COUNT) {
                 buffer.append(TEXT[c]);
             } else {
                 buffer.append(c);

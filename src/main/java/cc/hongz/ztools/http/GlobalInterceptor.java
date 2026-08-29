@@ -8,6 +8,7 @@ package cc.hongz.ztools.http;
  * @since 5.8.0
  */
 public enum GlobalInterceptor {
+    /** 单例实例. */
     INSTANCE;
 
     private final HttpInterceptor.Chain<HttpRequest> requestInterceptors = new HttpInterceptor.Chain<>();

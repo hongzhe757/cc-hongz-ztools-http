@@ -74,7 +74,8 @@ public class HttpResponse extends HttpBase<HttpResponse> implements Closeable {
      * @param isIgnoreBody   是否忽略读取响应体
      * @since 3.1.2
      */
-    protected HttpResponse(final HttpConnection httpConnection, final HttpConfig config, final Charset charset, final boolean isAsync, final boolean isIgnoreBody) {
+    protected HttpResponse(final HttpConnection httpConnection, final HttpConfig config, final Charset charset,
+            final boolean isAsync, final boolean isIgnoreBody) {
         this.httpConnection = httpConnection;
         this.config = config;
         this.charset = charset;
@@ -99,7 +100,7 @@ public class HttpResponse extends HttpBase<HttpResponse> implements Closeable {
      * @since 4.1.9
      */
     public boolean isOk() {
-        return this.status >= 200 && this.status < 300;
+        return this.status >= HttpStatus.HTTP_OK && this.status < HttpStatus.HTTP_MULT_CHOICE;
     }
 
     /**
@@ -336,7 +337,8 @@ public class HttpResponse extends HttpBase<HttpResponse> implements Closeable {
      * @return 写出bytes数
      * @since 5.7.12
      */
-    public long writeBody(final File targetFileOrDir, final String tempFileSuffix, final StreamProgress streamProgress) {
+    public long writeBody(final File targetFileOrDir, final String tempFileSuffix,
+            final StreamProgress streamProgress) {
         Assert.notNull(targetFileOrDir, "[targetFileOrDir] must be not null!");
 
         File outFile = completeFileNameFromHeader(targetFileOrDir);
@@ -684,7 +686,8 @@ public class HttpResponse extends HttpBase<HttpResponse> implements Closeable {
      * @param isIgnoreEOFError 是否忽略响应读取时可能的EOF异常
      * @return 拷贝长度
      */
-    private static long copyBody(final InputStream in, final OutputStream out, final long contentLength, final StreamProgress streamProgress, final boolean isIgnoreEOFError) {
+    private static long copyBody(final InputStream in, final OutputStream out, final long contentLength,
+            final StreamProgress streamProgress, final boolean isIgnoreEOFError) {
         if (null == out) {
             throw new NullPointerException("[out] is null!");
         }
@@ -695,7 +698,8 @@ public class HttpResponse extends HttpBase<HttpResponse> implements Closeable {
         } catch (IORuntimeException e) {
             //noinspection StatementWithEmptyBody
             if (isIgnoreEOFError
-                && (e.getCause() instanceof EOFException || StrUtil.containsIgnoreCase(e.getMessage(), "Premature EOF"))) {
+                && (e.getCause() instanceof EOFException
+                    || StrUtil.containsIgnoreCase(e.getMessage(), "Premature EOF"))) {
                 // 忽略读取HTTP流中的EOF错误
             } else {
                 throw e;

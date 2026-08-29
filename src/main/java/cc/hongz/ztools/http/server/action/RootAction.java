@@ -16,6 +16,7 @@ import java.util.List;
  */
 public class RootAction implements Action {
 
+    /** 默认首页文件名. */
     public static final String DEFAULT_INDEX_FILE_NAME = "index.html";
 
     private final File rootDir;

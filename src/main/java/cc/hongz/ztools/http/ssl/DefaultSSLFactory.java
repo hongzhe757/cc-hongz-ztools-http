@@ -8,6 +8,9 @@ package cc.hongz.ztools.http.ssl;
  */
 public class DefaultSSLFactory extends CustomProtocolsSSLFactory {
 
+    /**
+     * 构造.
+     */
     public DefaultSSLFactory() {
     }
 

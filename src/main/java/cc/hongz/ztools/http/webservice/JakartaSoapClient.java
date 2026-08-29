@@ -251,7 +251,8 @@ public class JakartaSoapClient extends HttpBase<JakartaSoapClient> {
      * @return {@link SOAPHeaderElement}
      * @since 5.4.4
      */
-    public SOAPHeaderElement addSOAPHeader(final QName name, final String actorURI, final String roleUri, final Boolean mustUnderstand, final Boolean relay) {
+    public SOAPHeaderElement addSOAPHeader(final QName name, final String actorURI, final String roleUri,
+            final Boolean mustUnderstand, final Boolean relay) {
         final SOAPHeaderElement ele = addSOAPHeader(name);
         try {
             if (StrUtil.isNotBlank(roleUri)) {
@@ -324,7 +325,8 @@ public class JakartaSoapClient extends HttpBase<JakartaSoapClient> {
      * @param useMethodPrefix 是否使用方法的命名空间前缀
      * @return this
      */
-    public JakartaSoapClient setMethod(final Name name, final Map<String, Object> params, final boolean useMethodPrefix) {
+    public JakartaSoapClient setMethod(final Name name, final Map<String, Object> params,
+            final boolean useMethodPrefix) {
         return setMethod(new QName(name.getURI(), name.getLocalName(), name.getPrefix()), params, useMethodPrefix);
     }
 
@@ -336,12 +338,13 @@ public class JakartaSoapClient extends HttpBase<JakartaSoapClient> {
      * @param useMethodPrefix 是否使用方法的命名空间前缀
      * @return this
      */
-    public JakartaSoapClient setMethod(final QName name, final Map<String, Object> params, final boolean useMethodPrefix) {
+    public JakartaSoapClient setMethod(final QName name, final Map<String, Object> params,
+            final boolean useMethodPrefix) {
         setMethod(name);
         final String prefix = useMethodPrefix ? name.getPrefix() : null;
-        final SOAPBodyElement methodEle = this.methodEle;
+        final SOAPBodyElement methodElement = this.methodEle;
         for (Entry<String, Object> entry : MapUtil.wrap(params)) {
-            setParam(methodEle, entry.getKey(), entry.getValue(), prefix);
+            setParam(methodElement, entry.getKey(), entry.getValue(), prefix);
         }
 
         return this;
@@ -578,7 +581,7 @@ public class JakartaSoapClient extends HttpBase<JakartaSoapClient> {
         return pretty ? XmlUtil.format(body) : body;
     }
 
-    // -------------------------------------------------------------------------------------------------------- Private method start
+    // ---------------------------------------------------------------- Private method start
 
     /**
      * 发送请求，获取异步响应.
@@ -622,7 +625,8 @@ public class JakartaSoapClient extends HttpBase<JakartaSoapClient> {
      * @return {@link SOAPElement}子节点
      */
     @SuppressWarnings("rawtypes")
-    private static SOAPElement setParam(final SOAPElement ele, final String name, final Object value, final String prefix) {
+    private static SOAPElement setParam(final SOAPElement ele, final String name, final Object value,
+            final String prefix) {
         final SOAPElement childEle;
         try {
             if (StrUtil.isNotBlank(prefix)) {
@@ -657,5 +661,5 @@ public class JakartaSoapClient extends HttpBase<JakartaSoapClient> {
 
         return childEle;
     }
-    // -------------------------------------------------------------------------------------------------------- Private method end
+    // ---------------------------------------------------------------- Private method end
 }

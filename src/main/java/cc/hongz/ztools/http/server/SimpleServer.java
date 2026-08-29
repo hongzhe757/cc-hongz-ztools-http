@@ -72,9 +72,9 @@ public class SimpleServer {
     public SimpleServer(final InetSocketAddress address, final HttpsConfigurator configurator) {
         try {
             if (null != configurator) {
-                final HttpsServer server = HttpsServer.create(address, 0);
-                server.setHttpsConfigurator(configurator);
-                this.server = server;
+                final HttpsServer httpsServer = HttpsServer.create(address, 0);
+                httpsServer.setHttpsConfigurator(configurator);
+                this.server = httpsServer;
             } else {
                 this.server = HttpServer.create(address, 0);
             }

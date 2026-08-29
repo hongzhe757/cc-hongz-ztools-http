@@ -41,11 +41,13 @@ public class HttpUtil {
     /**
      * 正则：Content-Type中的编码信息.
      */
-    public static final Pattern CHARSET_PATTERN = Pattern.compile("charset\\s*=\\s*([a-z0-9-]*)", Pattern.CASE_INSENSITIVE);
+    public static final Pattern CHARSET_PATTERN = Pattern.compile(
+            "charset\\s*=\\s*([a-z0-9-]*)", Pattern.CASE_INSENSITIVE);
     /**
      * 正则：匹配meta标签的编码信息.
      */
-    public static final Pattern META_CHARSET_PATTERN = Pattern.compile("<meta[^>]*?charset\\s*=\\s*['\"]?([a-z0-9-]*)", Pattern.CASE_INSENSITIVE);
+    public static final Pattern META_CHARSET_PATTERN = Pattern.compile(
+            "<meta[^>]*?charset\\s*=\\s*['\"]?([a-z0-9-]*)", Pattern.CASE_INSENSITIVE);
 
     /**
      * 检测是否https.
@@ -263,7 +265,8 @@ public class HttpUtil {
      * @param streamPress   进度条 {@link StreamProgress}
      * @return 文本
      */
-    public static String downloadString(final String url, final Charset customCharset, final StreamProgress streamPress) {
+    public static String downloadString(final String url, final Charset customCharset,
+            final StreamProgress streamPress) {
         return HttpDownloader.downloadString(url, customCharset, streamPress);
     }
 
@@ -324,7 +327,8 @@ public class HttpUtil {
      * @return 文件大小
      * @since 4.0.4
      */
-    public static long downloadFile(final String url, final File destFile, final int timeout, final StreamProgress streamProgress) {
+    public static long downloadFile(final String url, final File destFile, final int timeout,
+            final StreamProgress streamProgress) {
         return HttpDownloader.downloadFile(url, destFile, timeout, streamProgress);
     }
 
@@ -388,7 +392,8 @@ public class HttpUtil {
      * @return 下载的文件对象
      * @since 5.4.1
      */
-    public static File downloadFileFromUrl(final String url, final File destFile, final int timeout, final StreamProgress streamProgress) {
+    public static File downloadFileFromUrl(final String url, final File destFile, final int timeout,
+            final StreamProgress streamProgress) {
         return HttpDownloader.downloadForFile(url, destFile, timeout, streamProgress);
     }
 
@@ -413,7 +418,8 @@ public class HttpUtil {
      * @param streamProgress 进度条
      * @return 文件大小
      */
-    public static long download(final String url, final OutputStream out, final boolean isCloseOut, final StreamProgress streamProgress) {
+    public static long download(final String url, final OutputStream out, final boolean isCloseOut,
+            final StreamProgress streamProgress) {
         return HttpDownloader.download(url, out, isCloseOut, streamProgress);
     }
 
@@ -486,7 +492,8 @@ public class HttpUtil {
      * @return url参数
      * @since 5.7.16
      */
-    public static String toParams(final Map<String, ?> paramMap, final Charset charset, final boolean isFormUrlEncoded) {
+    public static String toParams(final Map<String, ?> paramMap, final Charset charset,
+            final boolean isFormUrlEncoded) {
         return UrlQuery.of(paramMap, isFormUrlEncoded).build(charset);
     }
 
@@ -631,7 +638,8 @@ public class HttpUtil {
      * @return 参数Map
      * @since 5.8.12
      */
-    public static Map<String, List<String>> decodeParams(final String paramsStr, final String charset, final boolean isFormUrlEncoded) {
+    public static Map<String, List<String>> decodeParams(final String paramsStr, final String charset,
+            final boolean isFormUrlEncoded) {
         return decodeParams(paramsStr, CharsetUtil.charset(charset), isFormUrlEncoded);
     }
 
@@ -655,7 +663,8 @@ public class HttpUtil {
      * @param isFormUrlEncoded 是否为x-www-form-urlencoded模式，此模式下空格会编码为'+'
      * @return 参数Map
      */
-    public static Map<String, List<String>> decodeParams(final String paramsStr, final Charset charset, final boolean isFormUrlEncoded) {
+    public static Map<String, List<String>> decodeParams(final String paramsStr, final Charset charset,
+            final boolean isFormUrlEncoded) {
         final Map<CharSequence, CharSequence> queryMap =
                 UrlQuery.of(paramsStr, charset, true, isFormUrlEncoded).getQueryMap();
         if (MapUtil.isEmpty(queryMap)) {
@@ -681,7 +690,8 @@ public class HttpUtil {
      * @param isEncodeParams 是否对键和值做转义处理
      * @return 合成后的URL
      */
-    public static String urlWithForm(final String url, final Map<String, Object> form, final Charset charset, final boolean isEncodeParams) {
+    public static String urlWithForm(final String url, final Map<String, Object> form,
+            final Charset charset, final boolean isEncodeParams) {
         // url和参数是分别编码的
         return urlWithForm(url, toParams(form, charset), charset, isEncodeParams);
     }
@@ -696,7 +706,8 @@ public class HttpUtil {
      * @param charset        编码   null表示不encode键值对
      * @return 合成后的URL
      */
-    public static String urlWithFormUrlEncoded(final String url, final Map<String, Object> form, final Charset charset) {
+    public static String urlWithFormUrlEncoded(final String url, final Map<String, Object> form,
+            final Charset charset) {
         // issue#3536，urlWithForm会对参数进行一次编码，因此toParams无需编码
         return urlWithForm(url, toParams(form, null, false), charset, true);
     }
@@ -710,7 +721,8 @@ public class HttpUtil {
      * @param isEncode    是否对键和值做转义处理
      * @return 拼接后的字符串
      */
-    public static String urlWithForm(final String url, final String queryString, final Charset charset, final boolean isEncode) {
+    public static String urlWithForm(final String url, final String queryString, final Charset charset,
+            final boolean isEncode) {
         if (StrUtil.isBlank(queryString)) {
             // 无额外参数
             if (StrUtil.contains(url, '?')) {
@@ -794,7 +806,8 @@ public class HttpUtil {
      * @param isGetCharsetFromContent 是否从返回内容中获得编码信息
      * @return 内容
      */
-    public static String getString(final byte[] contentBytes, final Charset charset, final boolean isGetCharsetFromContent) {
+    public static String getString(final byte[] contentBytes, final Charset charset,
+            final boolean isGetCharsetFromContent) {
         if (null == contentBytes) {
             return null;
         }
@@ -811,7 +824,8 @@ public class HttpUtil {
                 try {
                     charsetInContent = Charset.forName(charsetInContentStr);
                 } catch (Exception e) {
-                    if (StrUtil.containsIgnoreCase(charsetInContentStr, "utf-8") || StrUtil.containsIgnoreCase(charsetInContentStr, "utf8")) {
+                    if (StrUtil.containsIgnoreCase(charsetInContentStr, "utf-8")
+                            || StrUtil.containsIgnoreCase(charsetInContentStr, "utf8")) {
                         charsetInContent = CharsetUtil.CHARSET_UTF_8;
                     } else if (StrUtil.containsIgnoreCase(charsetInContentStr, "gbk")) {
                         charsetInContent = CharsetUtil.CHARSET_GBK;

@@ -80,7 +80,8 @@ public class HttpInputStream extends InputStream {
      */
     private void init(final HttpResponse response) {
         try {
-            this.in = (response.status < HttpStatus.HTTP_BAD_REQUEST) ? response.httpConnection.getInputStream() : response.httpConnection.getErrorStream();
+            this.in = (response.status < HttpStatus.HTTP_BAD_REQUEST)
+                    ? response.httpConnection.getInputStream() : response.httpConnection.getErrorStream();
         } catch (IOException e) {
             if (false == (e instanceof FileNotFoundException)) {
                 throw new HttpException(e);
@@ -90,7 +91,8 @@ public class HttpInputStream extends InputStream {
 
         // 在一些情况下，返回的流为null，此时提供状态码说明
         if (null == this.in) {
-            this.in = new ByteArrayInputStream(StrUtil.format("Error request, response status: {}", response.status).getBytes());
+            this.in = new ByteArrayInputStream(
+                StrUtil.format("Error request, response status: {}", response.status).getBytes());
             return;
         }
 

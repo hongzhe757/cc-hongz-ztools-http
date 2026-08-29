@@ -30,7 +30,8 @@ public class HttpGlobalConfig implements Serializable {
      */
     private static int timeout = -1;
     private static boolean isAllowPatch = false;
-    private static String boundary = "--------------------Hutool_" + RandomUtil.randomString(16);
+    private static final int BOUNDARY_RANDOM_LENGTH = 16;
+    private static String boundary = "--------------------Hutool_" + RandomUtil.randomString(BOUNDARY_RANDOM_LENGTH);
     private static int maxRedirectCount = 0;
     private static boolean ignoreEOFError = true;
     private static boolean decodeUrl = false;
@@ -195,7 +196,8 @@ public class HttpGlobalConfig implements Serializable {
         }
         final Field methodsField = ReflectUtil.getField(HttpURLConnection.class, "methods");
         if (null == methodsField) {
-            throw new HttpException("None static field [methods] with Java version: [{}]", System.getProperty("java.version"));
+            throw new HttpException("None static field [methods] with Java version: [{}]",
+                System.getProperty("java.version"));
         }
 
         // 去除final修饰

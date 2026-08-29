@@ -251,7 +251,8 @@ public class SoapClient extends HttpBase<SoapClient> {
      * @return {@link SOAPHeaderElement}
      * @since 5.4.4
      */
-    public SOAPHeaderElement addSOAPHeader(final QName name, final String actorURI, final String roleUri, final Boolean mustUnderstand, final Boolean relay) {
+    public SOAPHeaderElement addSOAPHeader(final QName name, final String actorURI, final String roleUri,
+            final Boolean mustUnderstand, final Boolean relay) {
         final SOAPHeaderElement ele = addSOAPHeader(name);
         try {
             if (StrUtil.isNotBlank(roleUri)) {
@@ -339,9 +340,9 @@ public class SoapClient extends HttpBase<SoapClient> {
     public SoapClient setMethod(final QName name, final Map<String, Object> params, final boolean useMethodPrefix) {
         setMethod(name);
         final String prefix = useMethodPrefix ? name.getPrefix() : null;
-        final SOAPBodyElement methodEle = this.methodEle;
+        final SOAPBodyElement methodElement = this.methodEle;
         for (Entry<String, Object> entry : MapUtil.wrap(params)) {
-            setParam(methodEle, entry.getKey(), entry.getValue(), prefix);
+            setParam(methodElement, entry.getKey(), entry.getValue(), prefix);
         }
 
         return this;
@@ -578,7 +579,7 @@ public class SoapClient extends HttpBase<SoapClient> {
         return pretty ? XmlUtil.format(body) : body;
     }
 
-    // -------------------------------------------------------------------------------------------------------- Private method start
+    // ---------------------------------------------------------------- Private method start
 
     /**
      * 发送请求，获取异步响应.
@@ -622,7 +623,8 @@ public class SoapClient extends HttpBase<SoapClient> {
      * @return {@link SOAPElement}子节点
      */
     @SuppressWarnings("rawtypes")
-    private static SOAPElement setParam(final SOAPElement ele, final String name, final Object value, final String prefix) {
+    private static SOAPElement setParam(final SOAPElement ele, final String name, final Object value,
+            final String prefix) {
         final SOAPElement childEle;
         try {
             if (StrUtil.isNotBlank(prefix)) {
@@ -657,5 +659,5 @@ public class SoapClient extends HttpBase<SoapClient> {
 
         return childEle;
     }
-    // -------------------------------------------------------------------------------------------------------- Private method end
+    // ---------------------------------------------------------------- Private method end
 }

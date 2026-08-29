@@ -108,7 +108,8 @@ public final class HTMLFilter {
     private final boolean encodeQuotes;
     private boolean vDebug = false;
     /**
-     * flag determining whether to try to make tags when presented with "unbalanced" angle brackets (e.g. "&lt;b text &lt;/b&gt;" becomes "&lt;b&gt; text &lt;/g&gt;").
+     * flag determining whether to try to make tags when presented with "unbalanced" angle brackets
+     * (e.g. "&lt;b text &lt;/b&gt;" becomes "&lt;b&gt; text &lt;/g&gt;").
      * If set to false, unbalanced angle brackets will be
      * html escaped.
      */
@@ -204,10 +205,23 @@ public final class HTMLFilter {
 
     // ---------------------------------------------------------------
     // my versions of some PHP library functions
+
+    /**
+     * 返回指定 ASCII 码对应的字符.
+     *
+     * @param decimal ASCII 码
+     * @return 字符
+     */
     public static String chr(final int decimal) {
         return String.valueOf((char) decimal);
     }
 
+    /**
+     * 转义字符串中的 HTML 特殊字符.
+     *
+     * @param s 源字符串
+     * @return 转义后的字符串
+     */
     public static String htmlSpecialChars(final String s) {
         String result = s;
         result = regexReplace(P_AMP, "&amp;", result);

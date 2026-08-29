@@ -79,11 +79,13 @@ public class HttpConfig {
     /**
      * 请求前的拦截器，用于在请求前重新编辑请求.
      */
-    final HttpInterceptor.Chain<HttpRequest> requestInterceptors = GlobalInterceptor.INSTANCE.getCopiedRequestInterceptor();
+    final HttpInterceptor.Chain<HttpRequest> requestInterceptors =
+            GlobalInterceptor.INSTANCE.getCopiedRequestInterceptor();
     /**
      * 响应后的拦截器，用于在响应后处理逻辑.
      */
-    final HttpInterceptor.Chain<HttpResponse> responseInterceptors = GlobalInterceptor.INSTANCE.getCopiedResponseInterceptor();
+    final HttpInterceptor.Chain<HttpResponse> responseInterceptors =
+            GlobalInterceptor.INSTANCE.getCopiedResponseInterceptor();
 
     /**
      * 重定向时是否使用拦截器.
@@ -167,7 +169,7 @@ public class HttpConfig {
      * @return this
      */
     public HttpConfig setMaxRedirectCount(final int newMaxRedirectCount) {
-        this.maxRedirectCount = Math.max(maxRedirectCount, 0);
+        this.maxRedirectCount = Math.max(newMaxRedirectCount, 0);
         return this;
     }
 
@@ -192,9 +194,9 @@ public class HttpConfig {
      * @return this
      */
     public HttpConfig setHttpProxy(final String host, final int port) {
-        final Proxy proxy = new Proxy(Proxy.Type.HTTP,
+        final Proxy newProxy = new Proxy(Proxy.Type.HTTP,
             new InetSocketAddress(host, port));
-        return setProxy(proxy);
+        return setProxy(newProxy);
     }
 
     /**

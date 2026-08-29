@@ -408,7 +408,9 @@ public class HttpRequest extends HttpBase<HttpRequest> {
     }
 
     /**
-     * @return 获取是否为长连接
+     * 获取是否为长连接.
+     *
+     * @return 是否为长连接
      */
     public boolean isKeepAlive() {
         String connection = header(Header.CONNECTION);
@@ -1215,7 +1217,8 @@ public class HttpRequest extends HttpBase<HttpRequest> {
 
         // 获取响应
         if (null == httpResponse) {
-            httpResponse = new HttpResponse(this.httpConnection, this.config, this.charset, isAsync, isIgnoreResponseBody());
+            httpResponse = new HttpResponse(this.httpConnection, this.config, this.charset, isAsync,
+                isIgnoreResponseBody());
         }
 
         // 拦截响应
@@ -1344,7 +1347,8 @@ public class HttpRequest extends HttpBase<HttpRequest> {
                         this.headers.remove(Header.COOKIE.toString());
                         this.cookie = null;
                         // 307、308跨源时丢弃请求体，避免敏感表单数据泄漏（保留方法，不降级为GET）
-                        if (HttpStatus.HTTP_TEMP_REDIRECT == responseCode || HttpStatus.HTTP_PERMANENT_REDIRECT == responseCode) {
+                        if (HttpStatus.HTTP_TEMP_REDIRECT == responseCode
+                                || HttpStatus.HTTP_PERMANENT_REDIRECT == responseCode) {
                             this.body = null;
                             this.form = null;
                         }
@@ -1353,7 +1357,8 @@ public class HttpRequest extends HttpBase<HttpRequest> {
                     // https://www.rfc-editor.org/rfc/rfc7231#section-6.4.7
                     // https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Redirections
                     // 307、308方法和消息主体都不发生变化。
-                    if (HttpStatus.HTTP_TEMP_REDIRECT != responseCode && HttpStatus.HTTP_PERMANENT_REDIRECT != responseCode) {
+                    if (HttpStatus.HTTP_TEMP_REDIRECT != responseCode
+                            && HttpStatus.HTTP_PERMANENT_REDIRECT != responseCode) {
                         // 重定向默认使用GET
                         method(Method.GET);
                     }
@@ -1503,7 +1508,7 @@ public class HttpRequest extends HttpBase<HttpRequest> {
             return this;
         }
         if (null == this.form) {
-            this.form = new TableMap<>(16);
+            this.form = new TableMap<>(MapUtil.DEFAULT_INITIAL_CAPACITY);
         }
         this.form.put(name, value);
         return this;
