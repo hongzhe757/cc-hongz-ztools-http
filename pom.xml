@@ -15,7 +15,7 @@
     <packaging>jar</packaging>
 
     <name>cc-hongz-ztools-http</name>
-    <description>HTTP 客户端封装（对齐 hutool-http）</description>
+    <description>HTTP 客户端封装</description>
 
     <dependencies>
         <!-- cc-hongz-ztools-core：核心工具 -->
