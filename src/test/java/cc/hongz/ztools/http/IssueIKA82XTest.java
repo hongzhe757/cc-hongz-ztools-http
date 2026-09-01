@@ -2,6 +2,7 @@ package cc.hongz.ztools.http;
 
 import com.sun.net.httpserver.HttpServer;
 import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;
@@ -18,12 +19,14 @@ import static org.junit.jupiter.api.Assertions.assertNull;
  * <p>
  * 包含两类测试：复现测试（{@link Disabled}，修复前可复现漏洞）与回归测试（修复后验证敏感信息不再泄漏）。
  */
+@DisplayName("Issue IKA82X 跨源重定向敏感信息泄漏测试")
 public class IssueIKA82XTest {
 
     // ------------------------------------------------------------------ 复现测试（修复前可复现）
 
     @Test
     @Disabled("漏洞修复前用于复现，修复后此测试会失败")
+    @DisplayName("敏感头信息泄漏复现测试")
     public void sensitiveHeaderLeakReproduceTest() throws Exception {
         final AtomicReference<String> leakedAuthorization = new AtomicReference<>();
         final AtomicReference<String> leakedCookie = new AtomicReference<>();
@@ -60,6 +63,7 @@ public class IssueIKA82XTest {
 
     @Test
     @Disabled("漏洞修复前用于复现，修复后此测试会失败")
+    @DisplayName("POST Body 泄漏复现测试")
     public void postBodyLeakReproduceTest() throws Exception {
         final AtomicReference<String> leakedMethod = new AtomicReference<>();
         final AtomicReference<String> leakedBody = new AtomicReference<>();
@@ -100,6 +104,7 @@ public class IssueIKA82XTest {
     // ------------------------------------------------------------------ 回归测试（修复后验证）
 
     @Test
+    @DisplayName("敏感头信息不泄漏回归测试")
     public void sensitiveHeaderNotLeakTest() throws Exception {
         final AtomicReference<String> leakedAuthorization = new AtomicReference<>();
         final AtomicReference<String> leakedCookie = new AtomicReference<>();
@@ -135,6 +140,7 @@ public class IssueIKA82XTest {
     }
 
     @Test
+    @DisplayName("POST Body 不泄漏回归测试")
     public void postBodyNotLeakTest() throws Exception {
         final AtomicReference<String> leakedMethod = new AtomicReference<>();
         final AtomicReference<String> leakedBody = new AtomicReference<>();

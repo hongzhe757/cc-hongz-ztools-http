@@ -3,15 +3,19 @@ package cc.hongz.ztools.http.body;
 import cc.hongz.ztools.core.io.resource.StringResource;
 import cc.hongz.ztools.core.util.CharsetUtil;
 import cc.hongz.ztools.http.HttpResource;
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.util.HashMap;
 import java.util.Map;
 
+@DisplayName("MultipartBody 单元测试")
 public class MultipartBodyTest {
 
     @Test
+    @DisplayName("测试创建 multipart 请求体")
     public void buildTest() {
         Map<String, Object> form = new HashMap<>();
         form.put("pic1", "pic1 content");
@@ -23,6 +27,6 @@ public class MultipartBodyTest {
         final MultipartBody body = MultipartBody.create(form, CharsetUtil.CHARSET_UTF_8);
 
         assertNotNull(body.toString());
-//		Console.log(body);
+//        Console.log(body);
     }
 }

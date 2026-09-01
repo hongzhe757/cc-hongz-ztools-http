@@ -14,11 +14,14 @@ package cc.hongz.ztools.http;
 
 import cc.hongz.ztools.core.lang.Console;
 import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+@DisplayName("Issue 3197 GET 请求测试")
 public class Issue3197Test {
     @Test
     @Disabled
+    @DisplayName("GET 请求测试")
     public void getTest() {
         final String s = HttpUtil.get("http://localhost:8080/index");
         Console.log(s);

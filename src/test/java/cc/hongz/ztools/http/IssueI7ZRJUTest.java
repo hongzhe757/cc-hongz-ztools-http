@@ -14,14 +14,17 @@ package cc.hongz.ztools.http;
 
 import cc.hongz.ztools.core.lang.Console;
 import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import javax.net.ssl.SSLSocketFactory;
 
+@DisplayName("Issue I7ZRJU SSL 请求测试")
 public class IssueI7ZRJUTest {
 
     @Test
     @Disabled
+    @DisplayName("自定义 SSLSocketFactory 请求测试")
     public void getTest() {
         final HttpRequest httpRequest = HttpRequest.get("https://expired.badssl.com/");
         httpRequest.setSSLSocketFactory((SSLSocketFactory) SSLSocketFactory.getDefault());

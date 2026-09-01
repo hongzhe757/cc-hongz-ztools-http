@@ -3,6 +3,7 @@ package cc.hongz.ztools.http;
 import cc.hongz.ztools.core.io.FileUtil;
 import cc.hongz.ztools.core.lang.Console;
 import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
@@ -16,6 +17,7 @@ import java.util.Map;
  *
  * @author looly
  */
+@DisplayName("文件上传单元测试")
 public class UploadTest {
 
     /**
@@ -23,6 +25,7 @@ public class UploadTest {
      */
     @Test
     @Disabled
+    @DisplayName("多文件上传测试")
     public void uploadFilesTest() {
         File file = FileUtil.file("d:\\图片1.JPG");
         File file2 = FileUtil.file("d:\\图片3.png");
@@ -38,6 +41,7 @@ public class UploadTest {
 
     @Test
     @Disabled
+    @DisplayName("单文件上传测试")
     public void uploadFileTest() {
         File file = FileUtil.file("D:\\face.jpg");
 
@@ -51,6 +55,7 @@ public class UploadTest {
 
     @Test
     @Disabled
+    @DisplayName("分块流式上传测试")
     public void uploadTest2() {
         //客户端
         String url = "http://192.168.1.200:8888/meta/upload/img";
@@ -71,6 +76,7 @@ public class UploadTest {
 
     @Test
     @Disabled
+    @DisplayName("SM.MS 图床上传测试")
     public void smmsTest() {
         // https://github.com/chinabugotech/hutool/issues/2079
         // hutool的user agent 被封了

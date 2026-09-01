@@ -14,11 +14,14 @@ package cc.hongz.ztools.http;
 
 import cc.hongz.ztools.core.lang.Console;
 import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+@DisplayName("Issue I7EHSE 请求路径编码测试")
 public class IssueI7EHSETest {
     @Test
     @Disabled
+    @DisplayName("请求路径编码测试")
     public void encodePathTest() {
         String body = HttpUtil
             .createGet("http://hq.sinajs.cn/list=s_sh600090")

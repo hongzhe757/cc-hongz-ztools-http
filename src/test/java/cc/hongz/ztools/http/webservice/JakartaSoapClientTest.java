@@ -5,6 +5,7 @@ import cc.hongz.ztools.core.util.CharsetUtil;
 import jakarta.xml.soap.SOAPException;
 import jakarta.xml.soap.SOAPMessage;
 import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -13,10 +14,12 @@ import org.junit.jupiter.api.Test;
  * @author looly
  *
  */
+@DisplayName("Jakarta SOAP 客户端单元测试")
 public class JakartaSoapClientTest {
 
     @Test
     @Disabled
+    @DisplayName("SOAP 请求测试")
     public void requestTest() {
         JakartaSoapClient client = JakartaSoapClient.create("http://www.webxml.com.cn/WebServices/IpAddressSearchWebService.asmx")
         .setMethod("web:getCountryCityByIp", "http://WebXml.com.cn/")
@@ -30,6 +33,7 @@ public class JakartaSoapClientTest {
 
     @Test
     @Disabled
+    @DisplayName("SOAP 请求返回 Message 测试")
     public void requestForMessageTest() throws SOAPException {
         JakartaSoapClient client = JakartaSoapClient.create("http://www.webxml.com.cn/WebServices/IpAddressSearchWebService.asmx")
                 .setMethod("web:getCountryCityByIp", "http://WebXml.com.cn/")

@@ -14,11 +14,14 @@ package cc.hongz.ztools.http;
 
 import cc.hongz.ztools.core.lang.Console;
 import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+@DisplayName("Issue I7WZEO POST 请求测试")
 public class IssueI7WZEOTest {
     @Test
     @Disabled
+    @DisplayName("POST 请求测试")
     public void postTest() {
         final String post = HttpUtil.post("https://tenapi.cn/v2/video", "url=https://v.douyin.com/ie1EX3LH/");
         Console.log(post);

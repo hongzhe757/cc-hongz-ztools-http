@@ -13,12 +13,15 @@
 package cc.hongz.ztools.http;
 
 import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+@DisplayName("Issue 3074 POST 请求 Body 测试")
 public class Issue3074Test {
 
     @Test
     @Disabled
+    @DisplayName("POST 请求 Body 测试")
     public void bodyTest() {
         HttpUtil.createPost("http://localhost:8888/body")
             .contentType(ContentType.JSON.getValue())

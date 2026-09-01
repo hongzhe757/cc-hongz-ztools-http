@@ -6,10 +6,14 @@ import cc.hongz.ztools.core.net.multipart.UploadFile;
 import cc.hongz.ztools.http.ContentType;
 import cc.hongz.ztools.http.HttpUtil;
 import cc.hongz.ztools.json.JSONUtil;
+import org.junit.jupiter.api.DisplayName;
 
+@SuppressWarnings("checkstyle:HideUtilityClassConstructor")
+@DisplayName("HTTP 服务器综合功能测试")
 public class SimpleServerTest {
 
-    public static void main(String[] args) {
+    @DisplayName("验证静态资源、GET、JSON、表单、文件上传等综合功能")
+    public static void main(final String[] args) {
         HttpUtil.createServer(8888)
             .addFilter(((req, res, chain) -> {
                 Console.log("Filter: " + req.getPath());

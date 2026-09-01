@@ -13,22 +13,25 @@
 package cc.hongz.ztools.http;
 
 import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
 import java.util.Map;
 
+@DisplayName("Issue I6RE7J GET 请求 URL 解码测试")
 public class IssueI6RE7JTest {
 
     @Test
     @Disabled
+    @DisplayName("GET 请求 URL 解码测试")
     public void getTest() {
         HttpGlobalConfig.setDecodeUrl(true);
         final String baseUrl = "http://192.168.98.73/PIAPI/ArcValue";
 
-        final Map<String,Object> map = new HashMap<>();
-        map.put("tag","TXSM_SC2202-苯乙烯%");
-        map.put("time","2023/03/28 08:00:00");
+        final Map<String, Object> map = new HashMap<>();
+        map.put("tag", "TXSM_SC2202-苯乙烯%");
+        map.put("time", "2023/03/28 08:00:00");
         HttpUtil.get(baseUrl, map);
     }
 }
