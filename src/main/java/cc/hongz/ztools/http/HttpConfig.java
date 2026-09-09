@@ -211,6 +211,15 @@ public class HttpConfig {
     }
 
     /**
+     * 获取代理.
+     *
+     * @return 代理 {@link Proxy}
+     */
+    public Proxy getProxy() {
+        return this.proxy;
+    }
+
+    /**
      * 设置SSLSocketFactory. <br>
      * 只针对HTTPS请求，如果不设置，使用默认的SSLSocketFactory<br>
      * 默认SSLSocketFactory为：SSLSocketFactoryBuilder.create().build();
